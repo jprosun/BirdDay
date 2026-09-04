@@ -517,6 +517,17 @@ body.dem #quang{
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .san-vong:active{cursor:grabbing}
+/* Kéo xoay KHÔNG được biến thành bôi đen chữ hay kéo-thả ảnh. Hai hành vi
+   mặc định này của trình duyệt cướp mất cú kéo (nên kéo từ trên ảnh thì vòng
+   đứng im) và để lại vệt xanh chọn văn bản. */
+#san-khau{-webkit-user-select:none;-moz-user-select:none;user-select:none}
+/* Riêng bức thư vẫn cho bôi đen, lỡ bạn ấy muốn copy lại */
+.thu-noi-dung{-webkit-user-select:text;user-select:text}
+img{-webkit-user-drag:none;user-drag:none}
+/* Cả tấm ảnh cũng là chỗ kéo được, con trỏ phải nói lên điều đó.
+   Phải viết đủ nặng ký, vì luật .khung-vong{cursor:pointer} nằm sau sẽ đè. */
+.san-vong,.san-vong .khung-vong,.san-vong .khung-vong *{cursor:grab}
+.san-vong:active,.san-vong:active .khung-vong,.san-vong:active .khung-vong *{cursor:grabbing}
 .hop-vong{transform-style:preserve-3d;transform:rotateX(-5deg)}
 .vong{position:relative;width:0;height:0;transform-style:preserve-3d}
 .khung-vong{position:absolute;left:0;top:0;border-radius:2px;cursor:pointer;
@@ -945,7 +956,7 @@ html.no-js .thu-3d{animation:none !important}
         <!-- Tấm thiệp nằm trong lòng phong thư -->
         <div class="mat the-thu">
           <!-- CÓ THỂ SỬA: dòng chữ trên tấm thiệp -->
-          <p>Cường có một bất ngờ<br>cho em…</p>
+          <p>nmcuong có một bất ngờ<br>cho em…</p>
         </div>
 
         <div class="mat canh canh-t"></div>
@@ -1085,7 +1096,7 @@ html.no-js .thu-3d{animation:none !important}
 
       <div class="thu-ky cau-an">
         <span class="overline">Thương em rất nhiều,</span>
-        <span class="ten">Cường</span>
+        <span class="ten">nmcuong</span>
       </div>
 
       <div class="thu-cuoi cau-an">
@@ -1119,7 +1130,7 @@ const CAU_HINH = {
 
   /* ───── 1. TÊN NGƯỜI NHẬN ─────
      👉 THAY TÊN BẠN ẤY VÀO ĐÂY (dùng cho phong thư + đầu bức thư tay) */
-  TEN_EM: "Bảo Ngọc",
+  TEN_EM: "khngan meo meo thúi",
 
   /* ───── 2. NHẠC NỀN ─────
      ▸ ĐANG ĐỂ SẴN "nhac.mp3": anh chỉ cần chép file nhạc vào CÙNG THƯ MỤC với
@@ -1153,29 +1164,44 @@ const CAU_HINH = {
      số ngày hai đứa đã ở cạnh nhau. Để trống "" thì phần này tự ẩn đi. */
   NGAY_QUEN: "",
 
-  /* ───── 3. HAI CÂU HỎI Ở CHƯƠNG II ─────
-     dung: số thứ tự đáp án đúng, tính từ 0 (0 = đáp án đầu tiên) */
+  /* ───── 3. BA CÂU HỎI Ở CHƯƠNG II ─────
+     dung: số thứ tự đáp án đúng, tính từ 0 (0 = đáp án đầu tiên).
+     Câu nào có NHIỀU đáp án đúng thì ghi thành mảng, ví dụ  dung: [2, 3] */
   CAU_HOI: [
     {
-      hoi: "Món ăn đầu tiên hai đứa mình ăn cùng nhau là gì?",
-      chon: ["Bún đậu mắm tôm", "Trà sữa và bánh tráng trộn", "Lẩu Thái", "Cơm tấm sườn"],
-      dung: 1,                                  // 👈 sửa số này cho đúng đáp án
-      khen: "Đúng rồi đó! Anh vẫn nhớ hôm ấy em ăn cay tới đỏ cả mặt."
+      hoi: "Lần đầu tiên đi ăn, cảm xúc của anh như thế nào?",
+      chon: ["Tự tin, toả sáng, dzai", "Ngại ngùng, bẽn lẽn", "Ngơ ngơ nhưng cute", "Bad boy, hư hỏng"],
+      dung: 0,
+      khen: "Anh nhớ hôm ý anh cũng ngại lắm nhưng mà cố gồng hihi."
     },
     {
-      hoi: "Anh thích nhất điều gì ở em?",
-      chon: ["Cách em cười tít mắt", "Cách em giận dỗi rồi tự làm lành", "Cách em quan tâm người khác", "Tất cả — không chọn nổi"],
-      dung: 3,                                  // 👈 sửa số này cho đúng đáp án
-      khen: "Chuẩn không cần chỉnh. Em là cả một danh sách dài anh không rút gọn được."
+      hoi: "Kỉ niệm đáng nhớ nhất của 2 chúng ta là gì?",
+      chon: ["Lần đầu gặp nhau dưới nhà em",
+             "Cùng nhau đi lượn lờ, khám phá ở Tiến Xuân",
+             "Đưa em đi thi tiếng Trung",
+             "Cùng em đi mua bình gốm ở Bát Tràng cho mẹ"],
+      dung: 3,
+      khen: "Anh cũng không nghĩ là hôm ý lại là hôm anh thấy ấn tượng và cảm thấy thích như vậy =))). Mặc dù 1 sự cố hơi úp sọt hahaaha."
+    },
+    {
+      hoi: "Ngày em đi thực tập, em nghĩ anh sẽ cảm thấy như thế nào?",
+      chon: ["Vui vẻ không có em càng tốt muahaha",
+             "Không quan tâm vì anh là 1 người bạn trai hư hỏng",
+             "Buồn, lo lắng vì sợ em sẽ vất vả",
+             "Nhớ em vì có thể chúng ta sẽ ít gặp nhau hơn"],
+      dung: [2, 3],                             // 👈 câu này hai đáp án đều đúng
+      khen: "Muốn chúc em may mắn, đi mạnh khoẻ."
     }
   ],
 
   /* Câu trêu khi bấm SAI — hiện ngẫu nhiên */
   CAU_TREU: [
-    "Sai rồi nè, nghĩ kỹ lại đi bé ơi.",
-    "Ơ kìa… người yêu anh mà quên rồi à?",
-    "Không phải đâu, thử lại lần nữa nhé.",
-    "Gần đúng thôi! Cố lên nào."
+    "Sai rồi nè. Ngẫm lại chút đi, bé thúi.",
+    "Ơ kìa… người yêu anh mà cũng quên á?",
+    "Không phải cái này đâu. Thử lại đi, anh đợi mà.",
+    "Gần lắm rồi, mà vẫn chưa trúng. Cố lên nào.",
+    "Sai bét. Nhưng mà sai kiểu dễ thương ghê cơ.",
+    "Hmm… anh cho em thêm một lần nữa đó nha."
   ],
 
   /* ───── 4. BA MỐC THỜI GIAN Ở CHƯƠNG III ─────
@@ -1183,50 +1209,50 @@ const CAU_HINH = {
   MOC_THOI_GIAN: [
     {
       ngay: "Ngày đầu tiên",
-      tieude: "Ánh mắt chạm nhau",
+      tieude: "Sự bắt đầu của tình yêu",
       anhSo: 1,                                 // 👈 lấy ẢNH 1
       chuky: "Tin nhắn đầu tiên",
-      chu: "Anh vẫn nhớ như in cái khoảnh khắc đó. Giữa bao nhiêu người, không hiểu sao ánh mắt anh cứ dừng lại ở em. Hôm ấy anh còn chẳng dám nhìn lâu, chỉ kịp nghĩ một câu rất trẻ con: 'Ước gì mình quen được bạn này.' Ai mà ngờ điều ước vu vơ ấy lại thành thật."
+      chu: "Anh vẫn nhớ mình bắt đầu quen nhau qua bạn của em, anh nghĩ đó có thể là duyên. Với cả lúc đầu nhắn anh cũng không nghĩ là cô bé này, mai sau sẽ là người anh thương đến vậy. ( Mặc dù trước cũng định nhắn tán rồi đó lêu lêu )"
     },
     {
       ngay: "Những ngày sau đó",
-      tieude: "Tin nhắn đến 2 giờ sáng",
+      tieude: "Đại diện cho những mâu thuẫn",
       anhSo: 6,                                 // 👈 lấy ẢNH 6
       chuky: "Nước và lửa",
-      chu: "Là những đêm nhắn tin đến khi mắt díu lại mà vẫn tiếc không muốn tắt máy. Là những lần anh đứng đợi em trước cổng, trời mưa cũng đợi. Tình cảm mình lớn lên chẳng ồn ào gì cả, chỉ là mỗi ngày thêm một chút, cho tới khi anh nhận ra: thiếu em một ngày thôi là thấy trống."
+      chu: "Pic này, anh muốn nói lên rằng, trong khi yêu, nhiều khi chúng ta sẽ có những suy nghĩ, những ý kiến trái ngược nhau và xảy ra những xung đột, cãi vã. Nhưng anh mong, sau mỗi lần như vậy, mình chọn cùng nhau thấu hiểu và nắm tay nhau đi tiếp, chứ không phải là sẽ buông tay nhau…"
     },
     {
       ngay: "Và bây giờ",
-      tieude: "Chỗ dựa của nhau",
-      anhSo: 11,                                // 👈 lấy ẢNH 11
+      tieude: "Chấp nhận và thấu hiểu",
+      anhSo: 11,                                 // 👈 lấy ẢNH 11
       chuky: "Tấm ảnh anh thích nhất",
-      chu: "Mình đã cùng nhau đi qua vài lần cãi vã, vài lần mệt mỏi, vài lần tưởng như không hiểu nổi nhau. Nhưng sau tất cả, tay em vẫn ở trong tay anh. Anh nghĩ đó mới là điều đáng tự hào nhất — không phải mình yêu nhau đẹp thế nào, mà là mình đã chọn ở lại với nhau như thế nào."
+      chu: "Hmm, đây là tấm mà anh thấy ưng và đẹp nhất trong các ảnh anh và em chụp với nhau.Vì khoảng thời gian này qua nhiều mâu thuẫn, mình đã hiểu nhau hơn và anh muốn nó đại diện cho sự chấp nhận và thấu hiểu - 2 thứ mà chúng ta đã cùng làm để trở lên hòa hợp với nhau hơn.^^"
     }
   ],
 
   /* ───── 5. 15 TẤM ẢNH CHO VÒNG QUAY KỶ NIỆM (CHƯƠNG IV) ─────
-     ⚡ CÁCH NHANH NHẤT: đặt 15 file ảnh CÙNG THƯ MỤC với file HTML này và đặt tên
-        đúng  anh01.jpg, anh02.jpg … anh15.jpg  →  KHÔNG cần sửa một dòng code nào.
+     ⚡ CÁCH NHANH NHẤT: bỏ 15 file ảnh vào thư mục  anh/  nằm cạnh file HTML này,
+        đặt tên đúng  anh01.jpg, anh02.jpg … anh15.jpg  →  KHÔNG cần sửa dòng code nào.
      • Muốn dùng tên file khác (hoặc .png / .webp) thì sửa thẳng trong "file".
      • Chưa có ảnh nào thì trang vẫn chạy: chỗ đó hiện khung pastel ghi số thứ tự.
      • Ảnh cắt dọc tỉ lệ 4:5 (VD 800×1000px) là vừa khung đẹp nhất.
      • "chu" là dòng chú thích hiện ra khi bấm vào ảnh để xem lớn. */
   ANH_KY_NIEM: [
-    {file:"anh01.jpg", chu:"Tin nhắn đầu tiên"},
-    {file:"anh02.jpg", chu:"Anh bị ngã xe, em lo"},
-    {file:"anh03.jpg", chu:"Em mặc áo mưa cute"},
-    {file:"anh04.jpg", chu:"Mi xinh của bé"},
-    {file:"anh05.jpg", chu:"Anh chụp em"},
-    {file:"anh06.jpg", chu:"Nước và lửa"},
-    {file:"anh07.jpg", chu:"Em học nhiều quá nên hốc hác"},
-    {file:"anh08.jpg", chu:"Vi vu hnoi"},
-    {file:"anh09.jpg", chu:"Snhat năm ngoái"},
-    {file:"anh10.jpg", chu:"Em đi lên bản nè"},
-    {file:"anh11.jpg", chu:"Tấm ảnh anh thích nhất"},
-    {file:"anh12.jpg", chu:"Nhìn điện ảnh ghê"},
-    {file:"anh13.jpg", chu:"Ptb gần nhất nè"},
-    {file:"anh14.jpg", chu:"Em đi đà lạt"},
-    {file:"anh15.jpg", chu:"Em đi Quy Nhơn, tươi thế"}
+    {file:"anh/anh01.jpg", chu:"Tin nhắn đầu tiên"},
+    {file:"anh/anh02.jpg", chu:"Anh bị ngã xe, em lo"},
+    {file:"anh/anh03.jpg", chu:"Em mặc áo mưa cute"},
+    {file:"anh/anh04.jpg", chu:"Mi xinh của bé"},
+    {file:"anh/anh05.jpg", chu:"Anh chụp em"},
+    {file:"anh/anh06.jpg", chu:"Nước và lửa"},
+    {file:"anh/anh07.jpg", chu:"Em học nhiều quá nên hốc hác"},
+    {file:"anh/anh08.jpg", chu:"Vi vu hnoi"},
+    {file:"anh/anh09.jpg", chu:"Snhat năm ngoái"},
+    {file:"anh/anh10.jpg", chu:"Em đi lên bản nè"},
+    {file:"anh/anh11.jpg", chu:"Tấm ảnh anh thích nhất"},
+    {file:"anh/anh12.jpg", chu:"Nhìn điện ảnh ghê"},
+    {file:"anh/anh13.jpg", chu:"Ptb gần nhất nè"},
+    {file:"anh/anh14.jpg", chu:"Em đi đà lạt"},
+    {file:"anh/anh15.jpg", chu:"Em đi Quy Nhơn, tươi thế"}
   ]
 };
 /* ═══════════════ HẾT KHỐI CẤU HÌNH — bên dưới là phần code chạy ═══════════════ */
@@ -2048,11 +2074,14 @@ function veCauHoi(){
   oLoiNhac.textContent = '';
   oDapAn.innerHTML = '';
 
+  /* dung có thể là MỘT số, hoặc một MẢNG số khi câu hỏi có nhiều đáp án đúng */
+  const laDung = i => Array.isArray(c.dung) ? c.dung.indexOf(i) > -1 : i === c.dung;
+
   c.chon.forEach((noiDung, i) => {
     const b = document.createElement('button');
     b.className = 'lua-chon'; b.textContent = noiDung;
     b.addEventListener('click', () => {
-      if (i === c.dung){
+      if (laDung(i)){
         b.classList.add('dung');
         oLoiNhac.textContent = c.khen;
         thaTimBay(16);
@@ -2114,7 +2143,7 @@ function theAnh(soThuTu){
   const a = CAU_HINH.ANH_KY_NIEM[soThuTu - 1] || {file:'', chu:''};
   const nhan = String(soThuTu).padStart(2, '0');
   const duPhong = "<div class=\\'anh-tam\\'>📷<span>ẢNH " + nhan + "</span></div>";
-  return '<img src="' + a.file + '" alt="' + a.chu + '" loading="lazy" ' +
+  return '<img src="' + a.file + '" alt="' + a.chu + '" loading="lazy" draggable="false" ' +
          'onerror="this.outerHTML=\'' + duPhong + '\'">';
 }
 
@@ -2248,9 +2277,18 @@ themVongLap((t, dt) => {
   if (Math.abs(gocVong - gocDaVe) > 1.2){ capNhatVong(gocVong); gocDaVe = gocVong; }
 }, () => oMan4.classList.contains('hien'));
 
+/* Trình duyệt tự khởi động kéo-thả khi ngón tay/chuột đi trên một tấm ảnh.
+   Chặn từ gốc, nếu không cú kéo bị nó nuốt mất giữa chừng. */
+document.addEventListener('dragstart', e => {
+  if (e.target && e.target.closest && e.target.closest('#san-khau')) e.preventDefault();
+});
+
 addEventListener('pointerdown', e => {
   if (!oMan4.classList.contains('hien')) return;   // chương IV không mở thì thôi
   if (laNutBam(e) || !trongKhung(oSanVong, e)) return;
+  /* Chặn hành vi mặc định ngay tại đây: hết bôi đen, hết kéo ảnh.
+     Không ảnh hưởng việc chạm chọn ảnh, vì cái đó bắt ở pointerup. */
+  e.preventDefault();
   keoVong = true; xVongTruoc = e.clientX; duongKeoVong = 0; quanTinhVong = 0;
   mocKeoVong = e.timeStamp;
 });
@@ -2444,6 +2482,7 @@ themVongLap((t, dt) => {
 addEventListener('pointerdown', e => {
   if (daUoc || !oMan5.classList.contains('hien')) return;
   if (laNutBam(e) || !trongKhung(oSanBanh, e)) return;
+  e.preventDefault();
   keoBanh = true; xBanhTruoc = e.clientX; duongKeoBanh = 0; quanTinhBanh = 0;
   mocKeoBanh = e.timeStamp;
 });
