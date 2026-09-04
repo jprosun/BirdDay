@@ -528,9 +528,15 @@ body.dem #quang{
 .khung-vong img{display:block}
 .khung-vong .bong-san{position:absolute;left:8%;right:8%;bottom:-14px;height:14px;border-radius:50%;
   background:radial-gradient(ellipse,rgba(90,40,65,.5),transparent 70%);filter:blur(5px)}
-.so-khung{position:absolute;left:0;right:0;bottom:9px;padding:0 8px;text-align:center;
-  font-family:var(--serif);font-style:italic;font-size:12.5px;line-height:1.14;
-  max-height:29px;overflow:hidden;color:var(--muc-3)}
+.so-khung{position:absolute;left:0;right:0;bottom:9px;padding:0 7px;text-align:center;
+  font-family:var(--serif);font-style:italic;font-size:12.5px;line-height:1.24;
+  color:var(--muc-3);
+  /* Kẹp đúng 2 dòng: chú thích dài mấy cũng không tràn khỏi khung ảnh nữa.
+     Trước đây chỉ có max-height + overflow:hidden nên dòng thứ hai bị cắt
+     ngang thân chữ, mà khung lại không chừa đủ chỗ → chữ đè ra ngoài. */
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;text-overflow:ellipsis;
+  max-height:32px}
 
 #den-anh{position:fixed;inset:0;z-index:975;display:flex;align-items:center;justify-content:center;
   padding:clamp(22px,5vw,60px);background:rgba(26,10,18,.8);
@@ -1060,29 +1066,21 @@ html.no-js .thu-3d{animation:none !important}
     <!-- ─────── BỨC THƯ TAY CUỐI CÙNG — sửa thoải mái cho đúng giọng của anh ─────── -->
     <article class="buc-thu" id="buc-thu">
       <div class="thu-dau">
-        <h2 class="thu-tieu-de">Gửi <span class="ten-em">em</span> của anh,</h2>
-        <span class="overline">Ngày em tròn 20 tuổi</span>
+        <h2 class="thu-tieu-de">GỬI EM THÚI IU CỦA ANH</h2>
+        <span class="overline">ngày em tròn 20 tuổi</span>
       </div>
 
       <div class="thu-noi-dung" id="thu-noi-dung">
-        <p>Em vừa thổi tắt ngọn nến đầu tiên của tuổi 20 rồi đấy. Anh không biết em đã ước điều gì, nhưng anh mong nó là một điều thật tham lam — bởi vì em xứng đáng với những điều lớn hơn cả những gì em dám ước.</p>
+        <p>Khi em vừa thổi tắt ngọn nến đầu tiên của tuổi 20, anh không biết em đã ước điều gì, nhưng anh mong nó sẽ trở thành sự thật. Bởi vì em xứng đáng hơn cả những gì em đã ước.</p>
 
-        <p>Tuổi 20 nghe thì to tát lắm, người ta hay bảo đó là lúc phải trưởng thành, phải biết mình muốn gì, phải vững vàng. Nhưng anh chỉ mong em nhớ một điều thôi: trưởng thành không có nghĩa là em phải thôi mềm yếu. Em vẫn được phép mệt, được phép khóc, được phép loay hoay không biết ngày mai đi đâu về đâu. Trưởng thành chỉ là biết rằng sau tất cả những lần như thế, em vẫn sẽ đứng dậy — và lần nào cũng vậy, sẽ có một người đứng đợi sẵn ở đó để nắm tay em.</p>
+        <p>Tuổi 20 nghe thì to nhỉ, anh hay nghe mọi người bảo: “tuổi 20 là đại lộ của những giấc mơ tan vỡ”. Thật ra thì anh thấy cũng đúng, bởi vì 20 tuổi là chúng ta đã bắt đầu tập làm người lớn, chịu nhiều áp lực hơn và cũng gặp nhiều vấn đề hơn. Nào thì học hành này, sự nghiệp này, toàn những thứ là bước ngoặt trong cuộc đời của mình nhỉ. Mà anh thấy nhiều khi cố làm người lớn cũng vất lắm, thi thoảng stress thì lại chỉ muốn mình biến thành đứa trẻ vô lo, vô nghĩ như ngày xưa. Nhưng anh mong, dù là em có gặp chuyện gì hay vấn đề gì, dù nó to lớn đến đâu, thì em đều có thể mạnh mẽ vượt qua được và luôn nhớ rằng, anh sẽ luôn bên cạnh em, đồng hành cùng em.</p>
 
-        <p>Anh đã nhìn em đi qua những ngày rất khác nhau. Có ngày em rực rỡ đến mức anh không dám tin mình may mắn thế. Có ngày em lặng thinh, và anh học được rằng đôi khi thương một người không phải là nói thật nhiều, mà là ngồi im bên cạnh đủ lâu. Cả hai phiên bản ấy của em, anh đều thương như nhau.</p>
+        <p>Hì, thui tâm sự qua qua thui, vì nếu em muốn thì có thể mở audio lên nghe nha, món quà bí mật nữa của anh đó.</p>
 
-        <p>Nên năm nay anh không chúc em điều gì hoa mỹ cả. Anh chỉ chúc em ngủ đủ giấc, ăn uống tử tế, bớt tự trách mình những chuyện không phải lỗi của em. Chúc em giữ được sự dịu dàng ấy giữa một thế giới rất hay làm người ta chai sạn. Và chúc em, dù đi xa đến đâu, cũng luôn thấy nhẹ lòng mỗi khi quay về.</p>
+        <p>Anh chúc em luôn luôn mạnh khỏe, bình an (anh muốn chúc cái này đầu tiên, vì với anh, sự tồn tại của em đã làm anh hạnh phúc rồi), xinh đẹp, mặc dù với anh, em đã là người đẹp nhất rùi nma xinh thêm thì không thừa đâu nhỉ =))), lương thiện, sống tử tế với mọi người giống cách em vẫn luôn tử tế với anh. Chúc em mãi giữ được sự hồn nhiên, vui vẻ như mỗi lúc em đùa với anh. Chúc em học tập,công việc thuận lợi, gặp nhiều may mắn, được quý nhân phù trợ (giống anh nè hihi, anh hay có quý nhân phù trợ lắm) và luôn đủ tự tin, dũng cảm để theo đuổi những thứ mà em thích.</p>
 
-        <p>Còn phần của anh, anh hứa: anh sẽ là người kiên nhẫn nhất trên hành trình của em. Không phải để đi trước dắt em, cũng không phải để đi sau đẩy em, mà là đi ngang — đủ gần để em quay sang là thấy, đủ vững để em dựa vào lúc mỏi.</p>
+        <p>Chúc mừng sinh nhật em, cô gái anh yêu, mong là năm sau anh vẫn sẽ được đón sinh nhật cùng với em.</p>
 
-        <p>Chúc mừng sinh nhật em, cô gái 20 tuổi của anh. Cảm ơn em vì đã lớn lên, và đã chọn lớn lên cùng anh.</p>
-      </div>
-
-      <!-- Bộ đếm ngày: tự ẩn nếu để trống NGAY_QUEN trong khối CẤU HÌNH -->
-      <div class="dem-ngay cau-an" id="dem-ngay" hidden>
-        <div class="vach-mo"></div>
-        <span class="so" id="so-ngay">0</span>
-        <span class="nhan">ngày mình ở cạnh nhau<br>— và còn vô số ngày nữa —</span>
       </div>
 
       <div class="thu-ky cau-an">
@@ -1187,21 +1185,21 @@ const CAU_HINH = {
       ngay: "Ngày đầu tiên",
       tieude: "Ánh mắt chạm nhau",
       anhSo: 1,                                 // 👈 lấy ẢNH 1
-      chuky: "Lần đầu gặp em",
+      chuky: "Tin nhắn đầu tiên",
       chu: "Anh vẫn nhớ như in cái khoảnh khắc đó. Giữa bao nhiêu người, không hiểu sao ánh mắt anh cứ dừng lại ở em. Hôm ấy anh còn chẳng dám nhìn lâu, chỉ kịp nghĩ một câu rất trẻ con: 'Ước gì mình quen được bạn này.' Ai mà ngờ điều ước vu vơ ấy lại thành thật."
     },
     {
       ngay: "Những ngày sau đó",
       tieude: "Tin nhắn đến 2 giờ sáng",
       anhSo: 6,                                 // 👈 lấy ẢNH 6
-      chuky: "Những đêm không ngủ",
+      chuky: "Nước và lửa",
       chu: "Là những đêm nhắn tin đến khi mắt díu lại mà vẫn tiếc không muốn tắt máy. Là những lần anh đứng đợi em trước cổng, trời mưa cũng đợi. Tình cảm mình lớn lên chẳng ồn ào gì cả, chỉ là mỗi ngày thêm một chút, cho tới khi anh nhận ra: thiếu em một ngày thôi là thấy trống."
     },
     {
       ngay: "Và bây giờ",
       tieude: "Chỗ dựa của nhau",
       anhSo: 11,                                // 👈 lấy ẢNH 11
-      chuky: "Tụi mình của hiện tại",
+      chuky: "Tấm ảnh anh thích nhất",
       chu: "Mình đã cùng nhau đi qua vài lần cãi vã, vài lần mệt mỏi, vài lần tưởng như không hiểu nổi nhau. Nhưng sau tất cả, tay em vẫn ở trong tay anh. Anh nghĩ đó mới là điều đáng tự hào nhất — không phải mình yêu nhau đẹp thế nào, mà là mình đã chọn ở lại với nhau như thế nào."
     }
   ],
@@ -1214,21 +1212,21 @@ const CAU_HINH = {
      • Ảnh cắt dọc tỉ lệ 4:5 (VD 800×1000px) là vừa khung đẹp nhất.
      • "chu" là dòng chú thích hiện ra khi bấm vào ảnh để xem lớn. */
   ANH_KY_NIEM: [
-    {file:"anh01.jpg", chu:"Lần đầu gặp em"},
-    {file:"anh02.jpg", chu:"Lần đầu đi chơi cùng nhau"},
-    {file:"anh03.jpg", chu:"Bữa ăn đầu tiên của hai đứa"},
-    {file:"anh04.jpg", chu:"Tấm ảnh chụp lén em"},
-    {file:"anh05.jpg", chu:"Ngày anh nắm tay em lần đầu"},
-    {file:"anh06.jpg", chu:"Những đêm không ngủ"},
-    {file:"anh07.jpg", chu:"Chuyến đi xa đầu tiên"},
-    {file:"anh08.jpg", chu:"Em của những ngày bình thường nhất"},
-    {file:"anh09.jpg", chu:"Ngày mưa hai đứa chung một áo"},
-    {file:"anh10.jpg", chu:"Cái ôm anh nhớ nhất"},
-    {file:"anh11.jpg", chu:"Tụi mình của hiện tại"},
-    {file:"anh12.jpg", chu:"Em cười — thứ anh xem hoài không chán"},
-    {file:"anh13.jpg", chu:"Một ngày rất đỗi bình yên"},
-    {file:"anh14.jpg", chu:"Kỷ niệm anh không muốn quên"},
-    {file:"anh15.jpg", chu:"Và còn nhiều thật nhiều phía trước"}
+    {file:"anh01.jpg", chu:"Tin nhắn đầu tiên"},
+    {file:"anh02.jpg", chu:"Anh bị ngã xe, em lo"},
+    {file:"anh03.jpg", chu:"Em mặc áo mưa cute"},
+    {file:"anh04.jpg", chu:"Mi xinh của bé"},
+    {file:"anh05.jpg", chu:"Anh chụp em"},
+    {file:"anh06.jpg", chu:"Nước và lửa"},
+    {file:"anh07.jpg", chu:"Em học nhiều quá nên hốc hác"},
+    {file:"anh08.jpg", chu:"Vi vu hnoi"},
+    {file:"anh09.jpg", chu:"Snhat năm ngoái"},
+    {file:"anh10.jpg", chu:"Em đi lên bản nè"},
+    {file:"anh11.jpg", chu:"Tấm ảnh anh thích nhất"},
+    {file:"anh12.jpg", chu:"Nhìn điện ảnh ghê"},
+    {file:"anh13.jpg", chu:"Ptb gần nhất nè"},
+    {file:"anh14.jpg", chu:"Em đi đà lạt"},
+    {file:"anh15.jpg", chu:"Em đi Quy Nhơn, tươi thế"}
   ]
 };
 /* ═══════════════ HẾT KHỐI CẤU HÌNH — bên dưới là phần code chạy ═══════════════ */
@@ -2220,7 +2218,7 @@ CAU_HINH.ANH_KY_NIEM.forEach((a, i) => {
   k.style.cssText =
     'width:' + RONG_KHUNG + 'px;height:' + CAO_KHUNG + 'px;' +
     'margin-left:' + (-RONG_KHUNG/2) + 'px;margin-top:' + (-CAO_KHUNG/2) + 'px;' +
-    'padding:9px 9px 34px;' +
+    'padding:9px 9px 44px;' +
     'transform:rotateY(' + (i*BUOC_GOC) + 'deg) translateZ(' + BAN_KINH + 'px);';
   k.innerHTML = theAnh(i + 1) +
                 '<div class="so-khung">' + a.chu + '</div><div class="bong-san"></div>';

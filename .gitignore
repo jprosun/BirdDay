@@ -6,3 +6,12 @@ nhac.mp3
 
 # Thư mục rác do lần dựng git hỏng để lại — anh xoá tay lúc nào cũng được
 _to_delete/
+
+# Script tro giup, chi dung o may - khong can nam trong repo
+push-len-github.bat
+
+# Anh goc 15.6 MB (co ca HEIC) - da nen thanh anh01..anh15.jpg roi, khong day len
+snhat/
+
+# File tam luc trich chu thich tu ten anh
+caption.json
