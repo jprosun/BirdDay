@@ -1,0 +1,8 @@
+# Bản ghi có bản quyền — chỉ để chạy ở máy, KHÔNG đẩy lên repo công khai.
+# Deploy lên GitHub Pages thì trang tự chuyển sang phát bản chính thức trên
+# YouTube: vẫn đúng bài Jay Park — 'Your/My', vẫn có fade và hạ nhạc.
+nhac.mp3
+*.mp3
+
+# Thư mục rác do lần dựng git hỏng để lại — anh xoá tay lúc nào cũng được
+_to_delete/
