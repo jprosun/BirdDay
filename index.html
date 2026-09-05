@@ -581,6 +581,8 @@ img{-webkit-user-drag:none;user-drag:none}
   line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,243,246,.075);
   pointer-events:none;user-select:none;z-index:-1;letter-spacing:-.05em}
 .khu-banh .dan-y{margin:22px 0 clamp(26px,4.4vh,48px)}
+/* Đã gỡ dòng hướng dẫn dưới tiêu đề, nên khoảng hở xuống chiếc bánh phải bù lại */
+.khu-banh .san-banh{margin-top:clamp(30px,5.2vh,58px)}
 
 .san-banh{width:344px;height:344px;margin:0 auto;perspective:1000px;perspective-origin:50% 38%;
   cursor:grab;touch-action:pan-y}
@@ -797,6 +799,7 @@ img{-webkit-user-drag:none;user-drag:none}
   .khung-quiz{padding:28px 22px}
   .san-banh{transform:scale(.9);transform-origin:center top;margin-bottom:-26px}
   .khu-banh .dan-y{margin:18px 0 22px}
+  .khu-banh .san-banh{margin-top:clamp(22px,3.4vh,34px)}
   /* Phong thư trên điện thoại: chừa lề hai bên cho khỏi sát mép màn hình */
   .thu-3d{width:min(432px,80vw);height:min(288px,54vw)}
   .sap{width:52px;height:52px;font-size:20px}
@@ -973,9 +976,6 @@ html.no-js .thu-3d{animation:none !important}
         <div class="mat sap">♥</div>
       </div>
 
-      <div class="dan-y len" id="dan-y-1" style="--tre:420ms">
-        Chạm vào phong thư để mở · 🔈 nhớ bật loa nhé
-      </div>
       <button class="nut" id="nut-tiep-1" style="display:none"><span>Đi tiếp</span></button>
     </div>
   </section>
@@ -1031,11 +1031,6 @@ html.no-js .thu-3d{animation:none !important}
         <span class="overline len">Chương IV</span>
         <h1 class="h1" data-tach>Vòng quay kỷ niệm</h1>
       </div>
-      <div class="phai">
-        <p class="dan-y len" style="--tre:180ms">
-          Mười lăm khoảnh khắc. Kéo ngang để xoay, chạm vào một tấm để xem lớn.
-        </p>
-      </div>
     </header>
 
     <!-- 15 khung ảnh do JS sinh ra từ mục ANH_KY_NIEM -->
@@ -1056,7 +1051,6 @@ html.no-js .thu-3d{animation:none !important}
       <div class="so-bong" aria-hidden="true">20</div>
       <span class="overline len">Chương V · Điều ước</span>
       <h1 class="h1 len" style="margin-top:14px;--tre:130ms">Chúc mừng<br><em>tuổi hai mươi</em></h1>
-      <p class="dan-y len" style="--tre:280ms">Chạm vào bánh để thổi nến · kéo ngang để xoay chiếc bánh</p>
 
       <!-- Bánh kem hình trụ 3D — các mặt do JS sinh ra -->
       <div class="san-banh" id="san-banh" role="button" tabindex="0"
@@ -2011,7 +2005,7 @@ oNutLui.addEventListener('click', () => toiChuong(chuongHienTai - 1));
    ═══════════════════════════════════════════════════════════════════════ */
 const oPhongThu = document.getElementById('phong-thu');
 const oNutTiep1 = document.getElementById('nut-tiep-1');
-const oDanY1 = document.getElementById('dan-y-1');
+const oDanY1 = document.getElementById('dan-y-1');   // có thể không còn, phải kiểm tra trước khi dùng
 let daMoThu = false;
 
 function moThu(){
@@ -2027,7 +2021,7 @@ function moThu(){
   oPhongThu.setAttribute('aria-expanded', 'true');
   const dauDe = document.querySelector('.dau-de-1');
   if (dauDe) dauDe.classList.add('nhuong');
-  oDanY1.style.opacity = '0';
+  if (oDanY1) oDanY1.style.opacity = '0';
   const bs = document.getElementById('bong-sat-thu');
   const bt = document.getElementById('bong-toa-thu');
   if (bs) bs.style.opacity = '.3';
@@ -2040,7 +2034,7 @@ function moThu(){
 
   setTimeout(() => bungPhao(180), 700);
   setTimeout(() => {
-    oDanY1.style.display = 'none';
+    if (oDanY1) oDanY1.style.display = 'none';
     oNutTiep1.style.display = 'inline-block';
     /* Trình duyệt cũ không có Element.animate thì nút vẫn hiện, chỉ mất hiệu ứng */
     if (oNutTiep1.animate) requestAnimationFrame(() => oNutTiep1.animate(
